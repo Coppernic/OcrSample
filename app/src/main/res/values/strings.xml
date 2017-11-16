@@ -7,4 +7,5 @@
     <string name="mrz_instance_created">MrzReader instance created</string>
     <string name="reader_opened">Reader opened</string>
     <string name="error_opening_reader">Error opening reader</string>
+    <string name="reader_powered_on">OCR reader powered on</string>
 </resources>

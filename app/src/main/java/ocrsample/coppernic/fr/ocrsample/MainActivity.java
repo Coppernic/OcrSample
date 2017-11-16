@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
     @Override
     public void onPowerUp(CpcResult.RESULT result, Peripheral peripheral) {
         if (result == CpcResult.RESULT.OK) {
-            Log.d (TAG, "OCR reader powered on");
+            Log.d (TAG, getString(R.string.reader_powered_on));
             // If OCR reader has been powered on
             MrzReader.Builder.get()
                 .setListener(mrzListener)
