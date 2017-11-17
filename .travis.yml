@@ -20,4 +20,4 @@ licenses:
   - '.+'
 
 script:
-./gradlew build
+   ./gradlew build
