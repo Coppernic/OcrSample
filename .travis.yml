@@ -5,6 +5,7 @@ android:
   components:
     - tools
     - build-tools-26.0.0
+    - tools
     - platform-tools
     - android-26
     - extra-android-support
@@ -14,7 +15,8 @@ android:
 before_install:
   - mkdir "$ANDROID_HOME/licenses" || true
   - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
-
+  - chmod +x gradlew
+  
 licenses:
   - android-sdk-license-.+
   - '.+'
