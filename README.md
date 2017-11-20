@@ -68,8 +68,7 @@ protected void onCreate(Bundle savedInstanceState) {
 ```java
 // Powers on OCR reader
 ConePeripheral.OCR_ACCESSIS_AI310E_USB.on(context);
-
-//The listener will be called with the result
+// The listener will be called with the result
 ```
 
  * Power off when you are done
@@ -77,7 +76,7 @@ ConePeripheral.OCR_ACCESSIS_AI310E_USB.on(context);
 ```java
 // Powers off OCR reader
 ConePeripheral.OCR_ACCESSIS_AI310E_USB.off(context);
-//The the listener will be called with the result
+// The listener will be called with the result
 ```
 
  * release resources
