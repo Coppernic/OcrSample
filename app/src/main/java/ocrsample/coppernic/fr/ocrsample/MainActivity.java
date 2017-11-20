@@ -1,6 +1,5 @@
 package ocrsample.coppernic.fr.ocrsample;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
     private MrzReader mrzReader;
     //UI
     private TextView tvOcr;
-    private Context context;
     private Button btnFw;
 
     @Override
@@ -57,17 +55,15 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
             }
         });
 
-        context = getApplicationContext();
-
         // Power management
         PowerManager.get().registerListener(this);
     }
 
     @Override
     protected void onStart() {
-        // Powers on OCR reader
-        ConePeripheral.OCR_ACCESSIS_AI310E_USB.on(context);
         super.onStart();
+        // Powers on OCR reader
+        ConePeripheral.OCR_ACCESSIS_AI310E_USB.on(this);
     }
 
     @Override
@@ -75,15 +71,15 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
         mrzReader.close();
         addLogs(getString(R.string.reader_closed));
         // Powers off OCR reader
-        ConePeripheral.OCR_ACCESSIS_AI310E_USB.off(context);
+        ConePeripheral.OCR_ACCESSIS_AI310E_USB.off(this);
         super.onStop();
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         PowerManager.get().unregisterAll();
         PowerManager.get().releaseResources();
+        super.onDestroy();
     }
 
     @Override
@@ -95,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
                 .setListener(mrzListener)
                 .withPort(CpcDefinitions.OCR_READER_PORT_CONE)
                 .withBaudrate(CpcDefinitions.OCR_READER_BAUDRATE_CONE)
-                .build(context,this);
+                .build(this,this);
         } else {
             addLogs(getString(R.string.ocr_powerup_failed));
         }
