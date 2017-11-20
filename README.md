@@ -1,4 +1,4 @@
-# OcrSample
+l# OcrSample
 Sample application for Ocr reader on C-One e-ID
 
 ## Prerequisites
@@ -20,8 +20,8 @@ repositories {
 
 dependencies {
 // [...]
-    compile 'fr.coppernic.sdk.core:CpcCore:1.2.0'
-    compile 'fr.coppernic.sdk.ocr:CpcOcr:core'
+    compile 'fr.coppernic.sdk.core:CpcCore:1.3.0'
+    compile 'fr.coppernic.sdk.ocr:CpcOcr:3.0.0'
     compile 'fr.coppernic.sdk.cpcutils:CpcUtilsLib:6.12.0'
 // [...]
 }
