@@ -1,4 +1,4 @@
-package ocrsample.coppernic.fr.ocrsample;
+package fr.coppernic.samples.ocr;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +17,7 @@ import fr.coppernic.sdk.power.impl.cone.ConePeripheral;
 import fr.coppernic.sdk.utils.core.CpcDefinitions;
 import fr.coppernic.sdk.utils.core.CpcResult;
 import fr.coppernic.sdk.utils.io.InstanceListener;
+import ocrsample.coppernic.fr.ocrsample.R;
 
 
 public class MainActivity extends AppCompatActivity implements PowerListener, InstanceListener<MrzReader> {

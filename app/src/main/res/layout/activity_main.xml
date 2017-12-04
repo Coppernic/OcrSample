@@ -4,7 +4,7 @@
                                                  xmlns:tools="http://schemas.android.com/tools"
                                                  android:layout_width="match_parent"
                                                  android:layout_height="match_parent"
-                                                 tools:context="ocrsample.coppernic.fr.ocrsample.MainActivity">
+                                                 tools:context="ocrsample.coppernic.fr.ocrsample.fr.coppernic.samples.ocr.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
