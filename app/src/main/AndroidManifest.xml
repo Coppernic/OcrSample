@@ -2,7 +2,7 @@
 <manifest package="ocrsample.coppernic.fr.ocrsample"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="fr.coppernic.permission.RFID"/>
+    <uses-permission android:name="fr.coppernic.permission.OCR"/>
 
     <application
         android:allowBackup="true"
