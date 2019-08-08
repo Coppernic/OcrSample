@@ -14,7 +14,7 @@ import fr.coppernic.sdk.power.PowerManager;
 import fr.coppernic.sdk.power.api.PowerListener;
 import fr.coppernic.sdk.power.api.peripheral.Peripheral;
 import fr.coppernic.sdk.power.impl.cone.ConePeripheral;
-import fr.coppernic.sdk.utils.core.CpcDefinitions;
+import fr.coppernic.sdk.core.Defines;
 import fr.coppernic.sdk.utils.core.CpcResult;
 import fr.coppernic.sdk.utils.io.InstanceListener;
 import ocrsample.coppernic.fr.ocrsample.R;
@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        tvOcr = (TextView)findViewById(R.id.tvOcr);
+        tvOcr = (TextView) findViewById(R.id.tvOcr);
 
-        btnFw = (Button)findViewById(R.id.btnVersion);
+        btnFw = (Button) findViewById(R.id.btnVersion);
         btnFw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,13 +86,13 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
     @Override
     public void onPowerUp(CpcResult.RESULT result, Peripheral peripheral) {
         if (result == CpcResult.RESULT.OK) {
-            Log.d (TAG, getString(R.string.reader_powered_on));
+            Log.d(TAG, getString(R.string.reader_powered_on));
             // If OCR reader has been powered on
             MrzReader.Builder.get()
-                .setListener(mrzListener)
-                .withPort(CpcDefinitions.OCR_READER_PORT_CONE)
-                .withBaudrate(CpcDefinitions.OCR_READER_BAUDRATE_CONE)
-                .build(this,this);
+                    .setListener(mrzListener)
+                    .withPort(Defines.SerialDefines.OCR_READER_PORT_CONE)
+                    .withBaudrate(Defines.SerialDefines.OCR_READER_BAUDRATE_CONE)
+                    .build(this, this);
         } else {
             addLogs(getString(R.string.ocr_powerup_failed));
         }
@@ -105,13 +105,12 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
 
     @Override
     public void onCreated(MrzReader mrzReader) {
-        Log.d (TAG, getString(R.string.mrz_instance_created));
+        Log.d(TAG, getString(R.string.mrz_instance_created));
         this.mrzReader = mrzReader;
-        if( this.mrzReader.open() == CpcResult.RESULT.OK) {
+        if (this.mrzReader.open() == CpcResult.RESULT.OK) {
             addLogs(getString(R.string.reader_opened));
             enableUiAfterReaderInstantiation(true);
-        }
-        else{
+        } else {
             addLogs(getString(R.string.error_opening_reader));
         }
     }
@@ -142,19 +141,20 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
      * Displays log on screen
      * @param toLog data to display
      */
-    private void addLogs(String toLog){
-        tvOcr.append("\n"+toLog);
+    private void addLogs(String toLog) {
+        tvOcr.append("\n" + toLog);
     }
 
     /**
      * Clears log on screen
      */
-    private void clearLogs(){
+    private void clearLogs() {
         tvOcr.setText("");
     }
 
     /**
      * Enables/disables UI after power state of RFID reader has been changed.
+     *
      * @param enable true: enables, false: disables
      */
     private void enableUiAfterReaderInstantiation(final boolean enable) {
