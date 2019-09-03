@@ -44,7 +44,11 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
         btnFw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mrzReader.getFirmware();
+                if (mrzReader != null) {
+                    mrzReader.getFirmware();
+                } else {
+                    addLogs(getString(R.string.error_no_reader));
+                }
             }
         });
 
@@ -94,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
                     .withBaudrate(Defines.SerialDefines.OCR_READER_BAUDRATE_CONE)
                     .build(this, this);
         } else {
-            addLogs(getString(R.string.ocr_powerup_failed));
+            addLogs(getString(R.string.ocr_powerup_failed, result));
         }
     }
 
