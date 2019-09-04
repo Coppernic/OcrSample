@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
         addLogs(getString(R.string.reader_closed));
         // Powers off OCR reader
         ConePeripheral.OCR_ACCESSIS_AI310E_USB.off(this);
+        ConePeripheral.USB_HOST_ASKEY_CONE_GPIO.off(this);
         super.onStop();
     }
 
