@@ -1,9 +1,12 @@
 package fr.coppernic.samples.ocr;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -73,7 +76,9 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
 
     @Override
     protected void onStop() {
-        mrzReader.close();
+        if (mrzReader != null) {
+            mrzReader.close();
+        }
         addLogs(getString(R.string.reader_closed));
         // Powers off OCR reader
         ConePeripheral.OCR_ACCESSIS_AI310E_USB.off(this);
