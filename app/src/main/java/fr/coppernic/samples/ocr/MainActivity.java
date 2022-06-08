@@ -18,7 +18,9 @@ import fr.coppernic.sdk.power.api.PowerListener;
 import fr.coppernic.sdk.power.api.peripheral.Peripheral;
 import fr.coppernic.sdk.power.impl.cone.ConePeripheral;
 import fr.coppernic.sdk.core.Defines;
+import fr.coppernic.sdk.power.impl.idplatform.IdPlatformPeripheral;
 import fr.coppernic.sdk.utils.core.CpcResult;
+import fr.coppernic.sdk.utils.helpers.OsHelper;
 import fr.coppernic.sdk.utils.io.InstanceListener;
 import ocrsample.coppernic.fr.ocrsample.R;
 
@@ -71,7 +73,10 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
     protected void onStart() {
         super.onStart();
         // Powers on OCR reader
-        ConePeripheral.OCR_ACCESSIS_AI310E_USB.on(this);
+        if(OsHelper.isCone())
+            ConePeripheral.OCR_ACCESSIS_AI310E_USB.on(this);
+        else if(OsHelper.isIdPlatform())
+            IdPlatformPeripheral.OCR.on(this);
     }
 
     @Override
@@ -81,8 +86,12 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
         }
         addLogs(getString(R.string.reader_closed));
         // Powers off OCR reader
-        ConePeripheral.OCR_ACCESSIS_AI310E_USB.off(this);
-        ConePeripheral.USB_HOST_ASKEY_CONE_GPIO.off(this);
+        if(OsHelper.isCone()) {
+            ConePeripheral.OCR_ACCESSIS_AI310E_USB.off(this);
+            ConePeripheral.USB_HOST_ASKEY_CONE_GPIO.off(this);
+        } else if (OsHelper.isIdPlatform()){
+           // IdPlatformPeripheral.OCR.off(this);
+        }
         super.onStop();
     }
 
@@ -98,11 +107,17 @@ public class MainActivity extends AppCompatActivity implements PowerListener, In
         if (result == CpcResult.RESULT.OK) {
             Log.d(TAG, getString(R.string.reader_powered_on));
             // If OCR reader has been powered on
-            MrzReader.Builder.get()
-                    .setListener(mrzListener)
-                    .withPort(Defines.SerialDefines.OCR_READER_PORT_CONE)
-                    .withBaudrate(Defines.SerialDefines.OCR_READER_BAUDRATE_CONE)
-                    .build(this, this);
+            if(OsHelper.isCone()) {
+                MrzReader.Builder.get()
+                        .setListener(mrzListener)
+                        .withPort(Defines.SerialDefines.OCR_READER_PORT_CONE)
+                        .withBaudrate(Defines.SerialDefines.OCR_READER_BAUDRATE_CONE)
+                        .build(this, this);
+            } else if (OsHelper.isIdPlatform()){
+                addLogs(getString(R.string.reader_opened));
+                enableUiAfterReaderInstantiation(true);
+            }
+
         } else {
             addLogs(getString(R.string.ocr_powerup_failed, result));
         }
