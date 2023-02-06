@@ -5,13 +5,11 @@ buildscript {
         gradlePluginPortal()
         google()
         mavenCentral()
-        jcenter()
+        mavenLocal()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.2'
-        classpath "gradle.plugin.coppernic:android-config:0.3.9"
-        classpath 'com.noveogroup.android:check:1.2.5'
+        classpath 'com.android.tools.build:gradle:7.4.1'
     }
 }
 
@@ -19,9 +17,9 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenLocal()
         maven { url "https://nexus.coppernic.fr/repository/libs-release" }
         maven { url "https://nexus.coppernic.fr/plugins-release" }
-        mavenLocal()
     }
 }
 
