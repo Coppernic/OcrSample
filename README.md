@@ -3,7 +3,7 @@ Sample application for Ocr reader on C-One e-ID
 
 ## Prerequisites
 
-CpcSystemServices shall be installed on your device.
+CoreServices shall be installed on your device.
 Please install the last version available on FDroid already installed
  on your device.
  
@@ -148,3 +148,18 @@ mrzReader.open();
 ```
 
 Reader is fully initialized and is able to receive Mrz data in the listener.
+
+### Known issue
+
+When OCR is powered-on on an Android device, it is recognized as a new keyboard input, and leads to a change of configuration on Activity. This can lead to have Activity being recreated.
+To avoid such a behavior, it is recommended to handle the configuration changes in the AndroidManifest
+
+```
+https://developer.android.com/guide/topics/resources/runtime-changes#HandlingTheChange
+https://developer.android.com/guide/topics/manifest/activity-element
+```
+
+For example
+```
+android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|keyboard|locale"
+```

@@ -1,26 +1,24 @@
 plugins {
     id "fr.coppernic.versioning" version "3.1.2"
+    id 'com.android.application'
 }
 
-apply plugin: 'com.android.application'
-apply plugin: 'fr.coppernic.extensions'
-
-copper {
-    projectName = "OcrSample"
-
-    publications {
-        artiConfig = project.hasProperty('artiServer') ? project.artiServer : "arti01"
-    }
+repositories {
+    maven { url "https://nexus.coppernic.fr/repository/libs-release" }
+    google()
+    jcenter()
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
-
-apply plugin: 'fr.coppernic.android'
 
 android {
-    compileSdkVersion 28
+    namespace 'ocrsample.coppernic.fr.ocrsample'
+
+    compileSdkVersion 33
     defaultConfig {
         applicationId "fr.coppernic.samples.ocr"
-        minSdkVersion 17
-        targetSdkVersion 28
+        minSdkVersion 27
+        targetSdkVersion 33
         versionCode versioning.info.versionCode
         versionName versioning.info.display
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -42,18 +40,18 @@ android {
 String support = "27.1.1"
 
 dependencies {
-    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.5.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.8.0'
 
     implementation 'fr.coppernic.lib:splash:0.3.0'
 
-    implementation "fr.coppernic.sdk.core:CpcCore:1.11.2"
-    implementation 'fr.coppernic.sdk.ocr:CpcOcr:3.0.0'
+    implementation "fr.coppernic.sdk.core:CpcCore:2.2.1"
+    implementation 'fr.coppernic.sdk.ocr:CpcOcr:3.0.1'
     implementation 'fr.coppernic.sdk.cpcutils:CpcUtilsLib:6.19.1'
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
 }
